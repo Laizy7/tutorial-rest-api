@@ -17,12 +17,12 @@ class PostDetailResource extends JsonResource
         return [
             'id' => $this->id,
             'title' => $this->title,
+            'news_content' => $this->news_content,
             'author' => $this->author,
+            'created_at' => date_format($this->created_at, "d/m/Y H:i:s"),
             // 'writer' => $this->writer['username'],
             // Menerapkan sistem Eager Load
             'writer' => $this->whenLoaded('writer')->username,
-            'news_content' => $this->news_content,
-            'created_at' => date_format($this->created_at, "d/m/Y H:i:s"),
         ];
     }
 }
