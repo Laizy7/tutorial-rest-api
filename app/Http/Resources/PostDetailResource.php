@@ -23,6 +23,15 @@ class PostDetailResource extends JsonResource
             // 'writer' => $this->writer['username'],
             // Menerapkan sistem Eager Load
             'writer' => $this->whenLoaded('writer')->username,
+            'comments' => $this->whenLoaded('comments', function () {
+                return collect($this->comments)->each(function ($comment) {
+                    $comment->commentator;
+                    return $comment;
+                });
+            }),
+            'comment_total' => $this->whenLoaded('comments', function () {
+                return $this->comments->count();
+            }),
         ];
     }
 }
